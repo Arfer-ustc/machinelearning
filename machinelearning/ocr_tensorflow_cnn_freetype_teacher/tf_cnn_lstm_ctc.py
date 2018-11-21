@@ -5,7 +5,7 @@ tf CNN+LSTM+CTC 训练识别不定长数字字符图片
 
 @author: pengyuanjie
 """
-from genIDCard  import *
+from machinelearning.ocr_tensorflow_cnn_freetype_teacher.genIDCard  import *
 
 import numpy as np
 import time 
