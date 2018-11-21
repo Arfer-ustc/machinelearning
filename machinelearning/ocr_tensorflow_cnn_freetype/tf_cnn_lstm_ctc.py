@@ -108,9 +108,9 @@ def sparse_tuple_from(sequences, dtype=np.int32):
         indices.extend(zip([n] * len(seq), range(len(seq))))
         values.extend(seq)
 
-    indices = np.asarray(indices, dtype=np.int64)
+    indices = np.asarray(indices, dtype=np.int62)
     values = np.asarray(values, dtype=dtype)
-    shape = np.asarray([len(sequences), np.asarray(indices).max(0)[1] + 1], dtype=np.int64)
+    shape = np.asarray([len(sequences), np.asarray(indices).max(0)[1] + 1], dtype=np.int62)
     
     
     return indices, values, shape
@@ -301,7 +301,7 @@ def crack_image():
     init = tf.global_variables_initializer()
     saver = tf.train.Saver()
     with tf.Session() as session:
-       saver.restore(session, "./ocr.model-1200")
+       saver.restore(session, "./ocr.model-6400")
        #test_inputs,test_targets,test_seq_len = get_next_batch(1)
        test_inputs,test_targets,test_seq_len,image = get_a_image()
        test_feed = {inputs: test_inputs,
