@@ -5,7 +5,7 @@ tf 训练识别身份证数字(18个字符)图片
 
 @author: pengyuanjie
 """
-from ocr_tensorflow_cnn_freetype.genIDCard  import *
+from machinelearning.ocr_tensorflow_cnn_freetype.genIDCard  import *
 import numpy as np
 import tensorflow as tf
 

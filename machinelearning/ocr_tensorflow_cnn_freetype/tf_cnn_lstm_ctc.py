@@ -4,7 +4,7 @@
 tf CNN+LSTM+CTC 训练识别不定长数字字符图片
 
 """
-from ocr_tensorflow_cnn_freetype.genIDCard  import *
+from machinelearning.ocr_tensorflow_cnn_freetype.genIDCard  import *
 
 import numpy as np
 import time
@@ -387,11 +387,11 @@ def train():
             print(log.format(curr_epoch + 1, num_epochs, steps, train_cost, train_ler, val_cost, val_ler, time.time() - start, lr))
 
 if __name__ == '__main__':
-    #inputs, sparse_targets,seq_len = get_next_batch(1)
-    #print(inputs)
-    #print(decode_sparse_tensor(sparse_targets))
-    #crack_image()
-    try:
-        train()
-    except Exception as e:
-        print(e)
+    inputs, sparse_targets,seq_len = get_next_batch(1)
+    print(inputs)
+    print(decode_sparse_tensor(sparse_targets))
+    crack_image()
+    # try:
+    #     train()
+    # except Exception as e:
+    #     print(e)
