@@ -1,0 +1,6 @@
+model_checkpoint_path: "/Users/xuefei/PycharmProjects/machinelearning/captchaCnn/0.99captcha.model-3700"
+all_model_checkpoint_paths: "/Users/xuefei/PycharmProjects/machinelearning/captchaCnn/0.95captcha.model-2000"
+all_model_checkpoint_paths: "/Users/xuefei/PycharmProjects/machinelearning/captchaCnn/0.96captcha.model-2200"
+all_model_checkpoint_paths: "/Users/xuefei/PycharmProjects/machinelearning/captchaCnn/0.97captcha.model-2700"
+all_model_checkpoint_paths: "/Users/xuefei/PycharmProjects/machinelearning/captchaCnn/0.98captcha.model-3500"
+all_model_checkpoint_paths: "/Users/xuefei/PycharmProjects/machinelearning/captchaCnn/0.99captcha.model-3700"
