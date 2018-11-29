@@ -114,12 +114,12 @@ class gen_id_card(object):
        self.max_size = 4
        self.ft = put_chinese_text('fonts/OCR-B.ttf')
        
-    #随机生成字串，长度固定
+    #随机生成字串，长度固定/不固定
     #返回text,及对应的向量
     def random_text(self):
         text = ''
         vecs = np.zeros((self.max_size * self.len))
-        size = random.randint(1, self.max_size)
+        size = random.randint(1, self.max_size)  #长度随机 在1-maxlength之间
         #size = self.max_size
         for i in range(size):
             c = random.choice(self.char_set)
@@ -133,7 +133,7 @@ class gen_id_card(object):
     #根据生成的text，生成image,返回标签和图片元素数据
     def gen_image(self):
         text,vec = self.random_text()
-        img = np.zeros([32,256,3])
+        img = np.zeros([32,256,3])  #图片大小32*256
         # r = random.randint(0, 255)
         # b = random.randint(0, 255)
         # g = random.randint(0, 255)
@@ -370,10 +370,12 @@ if __name__ == '__main__':
     # plt.imshow(img)
     # plt.show()
 
+    #整个图像呈现出明显的黑白效果的过程
     img = img.convert('1')
     plt.imshow(img)
     plt.show()
     print('np.array(img).shape', np.array(img).shape)
+
     clearNoise(img)
     plt.imshow(img)
     plt.show()

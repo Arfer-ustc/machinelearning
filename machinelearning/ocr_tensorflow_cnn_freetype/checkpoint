@@ -1,2 +1,2 @@
-model_checkpoint_path: "ocr.model-6400"
-all_model_checkpoint_paths: "ocr.model-6400"
+model_checkpoint_path: "ocr.model-7000"
+all_model_checkpoint_paths: "ocr.model-7000"

@@ -108,9 +108,9 @@ def sparse_tuple_from(sequences, dtype=np.int32):
         indices.extend(zip([n] * len(seq), range(len(seq))))
         values.extend(seq)
 
-    indices = np.asarray(indices, dtype=np.int62)
+    indices = np.asarray(indices, dtype=np.int64)
     values = np.asarray(values, dtype=dtype)
-    shape = np.asarray([len(sequences), np.asarray(indices).max(0)[1] + 1], dtype=np.int62)
+    shape = np.asarray([len(sequences), np.asarray(indices).max(0)[1] + 1], dtype=np.int64)
     
     
     return indices, values, shape
@@ -142,14 +142,15 @@ def get_a_image():
     #生成不定长度的字串
     #image, text, vec = obj.gen_image(True)
     image, text, vec = obj.gen_image()
-    ### 新添
+    #********* 新添************
     img = Image.fromarray(image, mode='RGBA')
     color_ = random_color(0, 128)  # , random.randint(220, 250)
     create_noise_dots(img, color_)
     create_noise_curve(img, color_)
-    img = img.convert('L')
-    image = img.convert('1')
+    img = img.convert('L')     #模式L为灰色图像
+    image = img.convert('1')   #二值图像
     image = np.array(image)
+    #************************#
     #np.transpose 矩阵转置 (32*256,) => (32,256) => (256,32)
     inputs[0,:] = np.transpose(image.reshape((OUTPUT_SHAPE[0],OUTPUT_SHAPE[1])))
     codes.append(list(text))
@@ -239,7 +240,7 @@ def get_train_model():
     #1维向量 序列长度 [batch_size,]
     seq_len = tf.placeholder(tf.int32, [None])
     
-    #定义LSTM网络
+    #定义LSTM网络  num_hidden是指一个Cell中神经元的个数，并非循环层的Cell个数
     cell = tf.contrib.rnn.LSTMCell(num_hidden, state_is_tuple=True)
     #stack = tf.contrib.rnn.MultiRNNCell([cell] * num_layers, state_is_tuple=True)
     # sequence_length:是一个list，如果你要输入三句话，且三句话的长度分别是5,10,25,那么sequence_length=[5,10,25]
@@ -301,7 +302,7 @@ def crack_image():
     init = tf.global_variables_initializer()
     saver = tf.train.Saver()
     with tf.Session() as session:
-       saver.restore(session, "./ocr.model-6400")
+       saver.restore(session, "./ocr.model-7000")
        #test_inputs,test_targets,test_seq_len = get_next_batch(1)
        test_inputs,test_targets,test_seq_len,image = get_a_image()
        test_feed = {inputs: test_inputs,
@@ -309,8 +310,11 @@ def crack_image():
                     seq_len: test_seq_len}
        dd, log_probs, accuracy = session.run([decoded[0], log_prob, acc], test_feed)
        report_accuracy(dd, test_targets)
-       cv2.imshow('image', image)
-       cv2.waitKey(0)
+
+       # cv2.imshow('image', image)
+       # cv2.waitKey(0)
+       plt.imshow(image)
+       plt.show()
 
 
 def train():
